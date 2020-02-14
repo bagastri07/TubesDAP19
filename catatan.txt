@@ -1,0 +1,1582 @@
+package main
+
+import (
+	"bufio"
+	"encoding/json"
+	"fmt"
+	"io/ioutil"
+	"os"
+)
+
+const nMhs = 3000
+const nGdg = 5
+const nKmr = 12
+const nKsr = 4
+
+//MHS Tipe data untuk mahasiswapackage main
+
+import (
+	"bufio"
+	"encoding/json"
+	"fmt"
+	"io/ioutil"
+	"os"
+	"time"
+)
+
+const nMhs = 3000
+const nGdg = 5
+const nKmr = 12
+const nKsr = 4
+
+//MHS Tipe data untuk mahasiswa
+type MHS struct {
+	Nama     string `json:"nama"`
+	JKlmn    string `json:"jklmn"`
+	Nim      string `json:"Nim"`
+	Jurusan  string `json:"jurusan"`
+	Angkatan string `json:"angkatan"`
+	TAK      int    `json:"TAK"`
+}
+
+//GDG Tipe data untuk gedung
+type GDG struct {
+	Kode  string
+	Nama  string `json:"Name"`
+	Kamar [nKmr]KSR
+}
+
+type KSR struct {
+	Kasur [nKsr]struct {
+		Nama string
+		NIM  string
+	}
+}
+type RANK struct {
+	Nama, JKlmn, Jurusan string
+	TAK                  int
+}
+type RANKG struct {
+	NamaGdg, JAsrma string
+	TakTotal        float32
+	Jumlah          int
+}
+
+type Mhs [nMhs]MHS
+type GdgPutra [nGdg]GDG
+type GdgPutri [nGdg]GDG
+type Rank [nMhs]RANK
+type RankG [nGdg + nGdg]RANKG
+
+func InputWithSpaces(data *string) {
+
+	scanner := bufio.NewScanner(os.Stdin)
+	scanner.Scan()
+	line := scanner.Text()
+	*data = line
+
+}
+
+func ReadDataMHS(data *Mhs) {
+
+	plan, _ := ioutil.ReadFile("mahasiswa.json")
+	Convert := []byte(plan)
+	err := json.Unmarshal(Convert, &data)
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+}
+
+func WriteDataMHS(data *Mhs) {
+	output, err := json.MarshalIndent(data, "", "\t\t")
+	if err != nil {
+		fmt.Println("Gagal memperberbarui data mahasiswa:", err)
+		return
+	}
+	err = ioutil.WriteFile("mahasiswa.json", output, 0644)
+	if err != nil {
+		fmt.Println("Error writing JSON to file:", err)
+		return
+	}
+}
+
+func ReadRankGedung(data *RankG) {
+
+	plan, _ := ioutil.ReadFile("Peringkat Gedung.json")
+	Convert := []byte(plan)
+	err := json.Unmarshal(Convert, &data)
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+}
+
+func WriteRankGedung(data *RankG) {
+	output, err := json.MarshalIndent(data, "", "\t\t")
+	if err != nil {
+		fmt.Println("Gagal memperberbarui data peringkat gedung:", err)
+		return
+	}
+	err = ioutil.WriteFile("Peringkat Gedung.json", output, 0644)
+	if err != nil {
+		fmt.Println("Error writing JSON to file:", err)
+		return
+	}
+}
+
+func ReadDataGDGPutra(data *GdgPutra) {
+	plan, _ := ioutil.ReadFile("Gedung Putra.json")
+	Convert := []byte(plan)
+	err := json.Unmarshal(Convert, &data)
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+}
+
+func WriteDataGDGPutra(data *GdgPutra) {
+	output, err := json.MarshalIndent(data, "", "\t\t")
+	if err != nil {
+		fmt.Println("Gagal memperbarui data mahasiswa:", err)
+		return
+	}
+	err = ioutil.WriteFile("Gedung Putra.json", output, 0644)
+	if err != nil {
+		fmt.Println("error memperbarui data file mahasiswa:", err)
+		return
+	}
+}
+
+func ReadDataGDGPutri(data *GdgPutri) {
+	plan, _ := ioutil.ReadFile("Gedung Putri.json")
+	Convert := []byte(plan)
+	err := json.Unmarshal(Convert, &data)
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+}
+
+func WriteDataGDGPutri(data *GdgPutri) {
+	output, err := json.MarshalIndent(data, "", "\t\t")
+	if err != nil {
+		fmt.Println("Gagal memperbarui data mahasiswa:", err)
+		return
+	}
+	err = ioutil.WriteFile("Gedung Putri.json", output, 0644)
+	if err != nil {
+		fmt.Println("error memperbarui data file mahasiswa:", err)
+		return
+	}
+}
+
+func ReadDataRank(data *Rank) {
+	plan, _ := ioutil.ReadFile("Peringkat TAK.json")
+	Convert := []byte(plan)
+	err := json.Unmarshal(Convert, &data)
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+}
+
+func WriteDataRANK(data *Rank) {
+	output, err := json.MarshalIndent(data, "", "\t\t")
+	if err != nil {
+		fmt.Println("Gagal memperbarui data mahasiswa:", err)
+		return
+	}
+	err = ioutil.WriteFile("Peringkat TAK.json", output, 0644)
+	if err != nil {
+		fmt.Println("error memperbarui data file mahasiswa:", err)
+		return
+	}
+}
+
+func FindEmptyPutra(data GdgPutra, x, y, z *int) {
+	found := false
+	for i := 0; i < nGdg; i++ {
+		for j := 0; j < nKmr; j++ {
+			for k := 0; k < nKsr; k++ {
+				if data[i].Kamar[j].Kasur[k].NIM == "" && !found {
+					*x = i
+					*y = j
+					*z = k
+					found = true
+				}
+			}
+		}
+	}
+}
+func FindEmptyPutri(data GdgPutri, x, y, z *int) {
+	found := false
+	for i := 0; i < nGdg; i++ {
+		for j := 0; j < nKmr; j++ {
+			for k := 0; k < nKsr && !found; k++ {
+				if data[i].Kamar[j].Kasur[k].NIM == "" {
+					*x = i
+					*y = j
+					*z = k
+					found = true
+				}
+			}
+		}
+	}
+}
+
+func FillNewStudent(data *Mhs) {
+	for i := 0; i < nMhs; i++ {
+		if data[i].Nim == "" {
+			fmt.Printf("Isi data Mahasiswa baru tersebut :\n")
+			fmt.Printf("\nNama Lengkap : ")
+			InputWithSpaces(&data[i].Nama)
+			fmt.Printf("\nCukup Ketik P atau L saja)\nJenis Kelamin : ")
+			InputWithSpaces(&data[i].JKlmn)
+			for data[i].JKlmn != "P" && data[i].JKlmn != "L" {
+				fmt.Printf("\nCukup Ketik P atau L saja)\nJenis Kelamin : ")
+				InputWithSpaces(&data[i].JKlmn)
+			}
+			fmt.Printf("NIM : ")
+			InputWithSpaces(&data[i].Nim)
+			fmt.Printf("Jurusan : ")
+			InputWithSpaces(&data[i].Jurusan)
+			fmt.Printf("Angkatan : ")
+			InputWithSpaces(&data[i].Angkatan)
+			fmt.Printf("TAK : ")
+			fmt.Scanln(&data[i].TAK)
+			fmt.Printf("\n\n===>Input Mahasiswa Baru Selesai<===\n")
+			break
+		}
+	}
+}
+
+func CheckIn(data1 Mhs, data2 *GdgPutra, data3 GdgPutra, data4 *GdgPutri, data5 GdgPutri) {
+	var Input, Index, x, y, z int
+	var NIM string
+
+	SearchMHS(data1, &NIM, &Index)
+	fmt.Printf("\n\nKonfirmasi. Apakah benar ? (1. Benar 2.Tidak Benar) : ")
+	Input = Validasi(1, 2)
+	for Input != 1 {
+		SearchMHS(data1, &NIM, &Index)
+		fmt.Printf("\n\nKonfirmasi. Apakah benar ? (1. Benar 2.Tidak Benar) : ")
+		Input = Validasi(1, 2)
+	}
+	if data1[Index].JKlmn == "P" {
+		FindEmptyPutri(data5, &x, &y, &z)
+		data4[x].Kamar[y].Kasur[z].Nama = data1[Index].Nama
+		data4[x].Kamar[y].Kasur[z].NIM = data1[Index].Nim
+		Kamar := ConvertNoKamar(y)
+		fmt.Printf("\n===>Check In berhasil<===\n\nDengan data kamar :\nNama : %v\nJurusan : %v", data1[Index].Nama, data1[Index].Jurusan)
+		fmt.Printf("\nGedung: %v\nKamar: %v\nKasur : %v\n\n===>Check in Selesai<==\n", data5[x].Nama, Kamar, z+1)
+
+	} else if data1[Index].JKlmn == "L" {
+		FindEmptyPutra(data3, &x, &y, &z)
+		data2[x].Kamar[y].Kasur[z].Nama = data1[Index].Nama
+		data2[x].Kamar[y].Kasur[z].NIM = data1[Index].Nim
+		Kamar := ConvertNoKamar(y)
+		fmt.Printf("\n===>Check in berhasil<===\n\nDengan data kamar :\nNama : %v\nJurusan : %v", data1[Index].Nama, data1[Index].Jurusan)
+		fmt.Printf("\nGedung: %v\nKamar: %v\nKasur : %v\n\n===>Check in Selesai<==\n", data3[x].Nama, Kamar, z+1)
+	}
+
+}
+
+func CheckOut(data1 Mhs, data2 *GdgPutra, data3 GdgPutra, data4 *GdgPutri, data5 GdgPutri) {
+	var NIM string
+	var Index, Input, x, y, z int
+
+	SearchMHS(data1, &NIM, &Index)
+	fmt.Printf("\n\nKonfirmasi. Apakah benar ? (1. Benar 2.Tidak Benar) : ")
+	Input = Validasi(1, 2)
+	for Input != 1 {
+		SearchMHS(data1, &NIM, &Index)
+		fmt.Printf("\n\nKonfirmasi. Apakah benar ? (1. Benar 2.Tidak Benar) : ")
+		Input = Validasi(1, 2)
+	}
+	if data1[Index].JKlmn == "L" {
+		SearchAsramaPutra(data3, NIM, &x, &y, &z)
+		fmt.Printf("\n\nKonfirmasi Check Out. (1. Iya, 2. Tidak) : ")
+		Input = Validasi(1, 2)
+		if Input == 1 {
+			data2[x].Kamar[y].Kasur[z].NIM = ""
+			data2[x].Kamar[y].Kasur[z].Nama = ""
+		}
+		fmt.Printf("\n ==>Check Out Berhasil<==")
+	} else if data1[Index].JKlmn == "P" {
+		SearchAsramaPutri(data5, NIM, &x, &y, &z)
+		fmt.Printf("\n\nKonfirmasi Check Out. (1. Iya, 2. Tidak) : ")
+		Input = Validasi(1, 2)
+		if Input == 1 {
+			data4[x].Kamar[y].Kasur[z].NIM = ""
+			data4[x].Kamar[y].Kasur[z].Nama = ""
+		}
+		fmt.Printf("\n ==>Check Out Berhasil<==")
+	}
+}
+
+func ChangeRoom(data1 Mhs, data2 *GdgPutra, data3 GdgPutra, data4 *GdgPutri, data5 GdgPutri) {
+	var NIM string
+	var Index, Input, x, y, z int
+
+	SearchMHS(data1, &NIM, &Index)
+	fmt.Printf("\n\nKonfirmasi. Apakah benar ? (1. Benar 2.Tidak Benar) : ")
+	Input = Validasi(1, 2)
+	for Input != 1 {
+
+		SearchMHS(data1, &NIM, &Index)
+		fmt.Printf("\n\nKonfirmasi. Apakah benar ? (1. Benar 2.Tidak Benar) : ")
+		Input = Validasi(1, 2)
+	}
+	if data1[Index].JKlmn == "L" {
+		SearchAsramaPutra(data3, NIM, &x, &y, &z)
+		data2[x].Kamar[y].Kasur[z].NIM = ""
+		data2[x].Kamar[y].Kasur[z].Nama = ""
+		FindEmptyPutra(data3, &x, &y, &z)
+		data2[x].Kamar[y].Kasur[z].Nama = data1[Index].Nama
+		data2[x].Kamar[y].Kasur[z].NIM = data1[Index].Nim
+		Kamar := ConvertNoKamar(y)
+		fmt.Printf("\n\n===>Change Room Berhasill<===\n\nDengan data kamar :\nNama : %v\nJurusan : %v", data1[Index].Nama, data1[Index].Jurusan)
+		fmt.Printf("\nGedung: %v\nKamar: %v\nKasur : %v\n\n===>Change Room Selesai<==\n", data3[x].Nama, Kamar, z+1)
+	} else if data1[Index].JKlmn == "P" {
+
+	}
+
+}
+
+func ConvertNoKamar(z int) int {
+	var kamar int
+	if z >= 9 {
+		kamar = z + 392
+	} else if z >= 6 {
+		kamar = z + 295
+	} else if z >= 3 {
+		kamar = z + 198
+	} else {
+		kamar = z + 101
+	}
+	return kamar
+}
+
+func Validasi(batas1 int, batas2 int) int {
+	var key int
+
+	valid := false
+	for !valid {
+		fmt.Scanln(&key)
+		if key >= batas1 && key <= batas2 {
+			valid = true
+		} else if valid == false {
+			fmt.Printf("Input tidak valid, silahkan diulang kembali\n Jawab (Ketik angka saja) : ")
+		}
+	}
+	return key
+}
+func SearchMHS(data Mhs, nim *string, index *int) {
+	var key string
+	found := false
+	for !found {
+		fmt.Printf("\nNIM Mahasiswa tersebut : ")
+		fmt.Scanln(&key)
+		for i := 0; i < nMhs && !found; i++ {
+			if data[i].Nim == key {
+				nama := data[i].Nama
+				Jurusan := data[i].Jurusan
+				Angkatan := data[i].Angkatan
+				TAK := data[i].TAK
+				fmt.Printf("\n==>Hasil Pencarian<===\n\nNama : %v\nJurusan : %v\nAngkatan : %v\nTAK : %v", nama, Jurusan, Angkatan, TAK)
+				*index = i
+				*nim = key
+				found = true
+			}
+		}
+		if found == false {
+			fmt.Printf("\nMahasiswa tidak ditemukan\nUlangi Kembali ...\n")
+		}
+	}
+
+}
+
+func SearchMHSfi(data Mhs, key string, index *int) {
+	found := false
+	for i := 0; i < nMhs && !found; i++ {
+		if data[i].Nim == key {
+			*index = i
+			found = true
+		}
+	}
+
+}
+
+func SearchAsramaPutra(data GdgPutra, key string, x, y, z *int) {
+	found := false
+	for i := 0; i < nGdg && !found; i++ {
+		for j := 0; j < nKmr && !found; j++ {
+			for k := 0; k < nKsr && !found; k++ {
+				if data[i].Kamar[j].Kasur[k].NIM == key {
+					*x = i
+					*y = j
+					*z = k
+					gedung := data[i].Nama
+					kamar := ConvertNoKamar(j)
+					kasur := k + 1
+					fmt.Printf("\n==>Data Asrama Mahasiswa Tersebut<===\n\nGedung : %v\nKamar : %v\nNo Kasur : %v", gedung, kamar, kasur)
+					found = true
+				}
+			}
+		}
+	}
+	if found == false {
+		fmt.Printf("\nMahasiswa tersebut tidak terdaftar pada database Asrama")
+	}
+}
+
+func SearchAsramaPutri(data GdgPutri, key string, x, y, z *int) {
+	found := false
+	for i := 0; i < nGdg && !found; i++ {
+		for j := 0; j < nKmr && !found; j++ {
+			for k := 0; k < nKsr && !found; k++ {
+				if data[i].Kamar[j].Kasur[k].NIM == key {
+					*x = i
+					*y = j
+					*z = k
+					gedung := data[i].Nama
+					kamar := ConvertNoKamar(j)
+					kasur := k + 1
+					fmt.Printf("\n==>Data Asrama Mahasiswa Tersebut<===\n\nGedung : %v\nKamar : %v\nNo Kasur : %v", gedung, kamar, kasur)
+					found = true
+				}
+			}
+		}
+	}
+	if found == false {
+		fmt.Printf("\nMahasiswa tersebut tidak terdaftar pada database Asrama")
+	}
+}
+
+func ShowRankMHS(data Rank) {
+	fmt.Printf("==>10 Besar Mahasiswa/i Teraktif<==\n\n")
+	for i := 0; i < 10; i++ {
+		fmt.Printf("Peringkat %v :\nNama :  %v\nJenis Kelamin : %v\nJurusan : %v\nPoint TAK : %v\n\n", i+1, data[i].Nama, data[i].JKlmn, data[i].Jurusan, data[i].TAK)
+	}
+}
+
+func ShowRankMHSPutri(data1 Rank) {
+	var j int
+
+	fmt.Printf("==>10 Besar Mahasiswi Teraktif<==\n\n")
+	for i := 0; j < 10; i++ {
+		if data1[i].JKlmn == "P" {
+			fmt.Printf("Peringkat %v :\nNama :  %v\nJenis Kelamin : %v\nJurusan : %v\nPoint TAK : %v\n\n", j+1, data1[i].Nama, data1[i].JKlmn, data1[i].Jurusan, data1[i].TAK)
+			j++
+		}
+	}
+}
+
+func ShowRankMHSPutra(data2 Rank) {
+	var j int
+
+	fmt.Printf("==>10 Besar Mahasiswa Teraktif<==\n\n")
+	for i := 0; j < 10; i++ {
+		if data2[i].JKlmn == "L" {
+			fmt.Printf("Peringkat %v :\nNama :  %v\nJenis Kelamin : %v\nJurusan : %v\nPoint TAK : %v\n\n", j+1, data2[i].Nama, data2[i].JKlmn, data2[i].Jurusan, data2[i].TAK)
+			j++
+		}
+	}
+}
+
+func ShowRankGdg(data RankG) {
+	fmt.Printf("==>Peringkat Gedung Asrama Teraktif<==\n\n")
+	for i := 0; i < nGdg+nGdg; i++ {
+		fmt.Printf("Peringkat %v\nNama Gedung : %v\nJenis Asrama : %v\nRata-rata TAK : %.2f\nJumlah Anggota : %v Mahasiswa\n\n", i+1, data[i].NamaGdg, data[i].JAsrma, data[i].TakTotal, data[i].Jumlah)
+	}
+}
+
+func ShowRankGdgPa(data RankG) {
+	var j int
+	fmt.Printf("==>Peringkat Gedung Asrama Teraktif<==\n\n")
+	for i := 0; i < nGdg+nGdg; i++ {
+		if data[i].JAsrma == "Putra" {
+			fmt.Printf("Peringkat %v\nNama Gedung : %v\nJenis Asrama : %v\nRata-rata TAK : %.2f\nJumlah Anggota : %v Mahasiswa\n\n", j+1, data[i].NamaGdg, data[i].JAsrma, data[i].TakTotal, data[i].Jumlah)
+			j++
+		}
+
+	}
+}
+
+func ShowRankGdgPi(data RankG) {
+	var j int
+	fmt.Printf("==>Peringkat Gedung Asrama Teraktif<==\n\n")
+	for i := 0; i < nGdg+nGdg; i++ {
+		if data[i].JAsrma == "Putri" {
+			fmt.Printf("Peringkat %v\nNama Gedung : %v\nJenis Asrama : %v\nRata-rata TAK : %.2f\nJumlah Anggota : %v Mahasiswa\n\n", j+1, data[i].NamaGdg, data[i].JAsrma, data[i].TakTotal, data[i].Jumlah)
+			j++
+		}
+
+	}
+}
+
+func UpdateTAK(data *Mhs, data1 Mhs) {
+	var NIM string
+	var Index, Input int
+	SearchMHS(data1, &NIM, &Index)
+	fmt.Printf("\n\nKonfirmasi. Apakah benar ? (1. Benar 2.Tidak Benar) : ")
+	Input = Validasi(1, 2)
+	for Input != 1 {
+
+		SearchMHS(data1, &NIM, &Index)
+		fmt.Printf("\n\nKonfirmasi. Apakah benar ? (1. Benar 2.Tidak Benar) : ")
+		Input = Validasi(1, 2)
+	}
+	fmt.Printf("Jumlah TAK baru : ")
+	fmt.Scanln(&data[Index].TAK)
+	fmt.Printf("\n\n===>Update TAK Selesai<==\n")
+}
+
+/*
+func AutoSync(data Mhs, data2 *GdgPutri) {
+	x := 0
+	j := 0
+	var SimpanPerempuan [170]struct {
+		nama string
+		nim  string
+	}
+	for i := 0; i < nMhs; i++ {
+		if data[i].JKlmn == "P" {
+			SimpanPerempuan[j].nama = data[i].Nama
+			SimpanPerempuan[j].nim = data[i].Nim
+			j = j + 1
+		}
+	}
+
+	for i := 0; i < nGdg; i++ {
+		for j := 0; j < nKmr; j++ {
+			for k := 0; k < nKsr-2; k++ {
+				if data2[i].Kamar[j].Kasur[k].NIM == "" {
+					data2[i].Kamar[j].Kasur[k].Nama = SimpanPerempuan[x].nama
+					data2[i].Kamar[j].Kasur[k].NIM = SimpanPerempuan[x].nim
+					x = x + 1
+				}
+			}
+		}
+	}
+}*/
+
+func AutoSycRank(data Mhs, rank *Rank) {
+	for k := 0; k < nMhs; k++ {
+		rank[k].Nama = data[k].Nama
+		rank[k].TAK = data[k].TAK
+		rank[k].JKlmn = data[k].JKlmn
+		rank[k].Jurusan = data[k].Jurusan
+	}
+}
+
+func AutoSyncRankGDG(data GdgPutra, data1 GdgPutri, data2 Mhs, rank *RankG) {
+	var TAKtotal, Index, nM int
+	for k := 0; k < nGdg; k++ {
+		nM = 0
+		rank[k].NamaGdg = data[k].Nama
+		rank[k].JAsrma = "Putra"
+		TAKtotal = 0
+		for l := 0; l < nKmr; l++ {
+			for m := 0; m < nKsr; m++ {
+				SearchMHSfi(data2, data[k].Kamar[l].Kasur[m].NIM, &Index)
+				if data2[Index].Nim != "" {
+					TAKtotal = TAKtotal + data2[Index].TAK
+					nM = nM + 1
+				}
+			}
+		}
+		rank[k].TakTotal = float32(TAKtotal) / float32(nM)
+		rank[k].Jumlah = nM
+	}
+
+	i := nGdg
+	for k := 0; k < nGdg; k++ {
+		nM = 0
+		rank[i].NamaGdg = data1[k].Nama
+		rank[i].JAsrma = "Putri"
+		TAKtotal = 0
+		for l := 0; l < nKmr; l++ {
+			for m := 0; m < nKsr; m++ {
+				SearchMHSfi(data2, data1[k].Kamar[l].Kasur[m].NIM, &Index)
+				if data2[Index].Nim != "" {
+					TAKtotal = TAKtotal + data2[Index].TAK
+					nM = nM + 1
+				}
+			}
+		}
+		rank[i].TakTotal = float32(TAKtotal) / float32(nM)
+		rank[i].Jumlah = nM
+		i++
+	}
+}
+
+func SelectSortRank(data *Rank) {
+	for i := 0; i < nMhs; i++ {
+		iMax := i
+		for j := i + 1; j < nMhs; j++ {
+			if data[iMax].TAK < data[j].TAK {
+				iMax = j
+			}
+		}
+		temp := data[iMax].TAK
+		data[iMax].TAK = data[i].TAK
+		data[i].TAK = temp
+		temp1 := data[iMax].Nama
+		data[iMax].Nama = data[i].Nama
+		data[i].Nama = temp1
+		temp1 = data[iMax].JKlmn
+		data[iMax].JKlmn = data[i].JKlmn
+		data[i].JKlmn = temp1
+		temp1 = data[iMax].Jurusan
+		data[iMax].Jurusan = data[i].Jurusan
+		data[i].Jurusan = temp1
+	}
+}
+
+func SelectSortRankG(data *RankG) {
+	for i := 0; i < nGdg+nGdg; i++ {
+		iMax := i
+		for j := i + 1; j < nGdg+nGdg; j++ {
+			if data[iMax].TakTotal < data[j].TakTotal {
+				iMax = j
+			}
+		}
+		temp := data[iMax].TakTotal
+		data[iMax].TakTotal = data[i].TakTotal
+		data[i].TakTotal = temp
+		temp1 := data[iMax].NamaGdg
+		data[iMax].NamaGdg = data[i].NamaGdg
+		data[i].NamaGdg = temp1
+		temp1 = data[iMax].JAsrma
+		data[iMax].JAsrma = data[i].JAsrma
+		data[i].JAsrma = temp1
+		temp2 := data[iMax].Jumlah
+		data[iMax].Jumlah = data[i].Jumlah
+		data[i].Jumlah = temp2
+	}
+}
+
+func main() {
+	var dataMahasiswa Mhs
+	var dataGedungPa GdgPutra
+	var dataGedungPi GdgPutri
+	var Peringkat Rank
+	var PeringkatGDG RankG
+	var Input int
+
+	/*
+		//FillNewStudent(&dataMahasiswa)
+		ReadDataMHS(&dataMahasiswa)
+		ReadDataGDGPutra(&dataGedungPa)
+		ReadDataGDGPutri(&dataGedungPi)
+		//CheckIn(dataMahasiswa, &dataGedungPa, dataGedungPa, &dataGedungPi, dataGedungPi)
+		//CheckOut(dataMahasiswa, &dataGedungPa, dataGedungPa, &dataGedungPi, dataGedungPi)
+		//ChangeRoom(dataMahasiswa, &dataGedungPa, dataGedungPa, &dataGedungPi, dataGedungPi)
+		//AutoSync(dataMahasiswa, &dataGedungPi)
+		WriteDataGDGPutra(&dataGedungPa)
+		WriteDataGDGPutri(&dataGedungPi)
+		//FillNewStudent(&dataMahasiswa)
+		//UpdateTAK(&dataMahasiswa, dataMahasiswa)
+		WriteDataMHS(&dataMahasiswa)
+		ReadDataRank(&Peringkat)
+		AutoSycRank(dataMahasiswa, &Peringkat)
+		SelectSortRank(&Peringkat)
+		//ShowRankMHS(Peringkat)
+		//ShowRankMHSPutra(Peringkat)
+		WriteDataRANK(&Peringkat)
+		ReadRankGedung(&PeringkatGDG)
+		AutoSyncRankGDG(dataGedungPa, dataGedungPi, dataMahasiswa, &PeringkatGDG)
+		SelectSortRankG(&PeringkatGDG)
+		WriteRankGedung(&PeringkatGDG)
+		//ShowRankGdg(PeringkatGDG)
+		//ShowRankGdgPa(PeringkatGDG)
+		ShowRankGdgPi(PeringkatGDG)
+		//SearchMHS(dataMahasiswa, "1301194051")
+		//fmt.Print(dataGedungPi[0].Kamar[0].Kasur[0].Nama)
+		//var Input int
+		//Input = Validasi(Input, 1, 2)
+
+	*/
+	ReadDataMHS(&dataMahasiswa)
+	ReadDataGDGPutra(&dataGedungPa)
+	ReadDataGDGPutri(&dataGedungPi)
+	ReadDataRank(&Peringkat)
+	ReadRankGedung(&PeringkatGDG)
+
+	for Input != 5 {
+		fmt.Printf("===>Menu Utama<===\n\n1. Info Data Asrama\n2. Info Data Mahasiswa\n3. Perubahan Data Mahasiswa\n4. Perubahan Data Asrama\n5. Keluar\n\n")
+		fmt.Printf("Respon (ketik angka saja) : ")
+		Input = Validasi(1, 5)
+
+		switch Input {
+		case 1:
+			Input = 0
+			for Input != 4 {
+				fmt.Printf("\n\n===>Info Data Asrama<===\n\n1. Gedung Asrama Teraktif (Pa/Pi)\n2. Gedung Asrama Putra Teraktif\n3. Gedung Asrama Putri Teraktif\n4. Kembali\n\n")
+				fmt.Printf("Respon (ketik angka saja) : ")
+				Input = Validasi(1, 4)
+				switch Input {
+				case 1:
+					ShowRankGdg(PeringkatGDG)
+					time.Sleep(2 * time.Second)
+
+				case 2:
+					ShowRankGdgPa(PeringkatGDG)
+					time.Sleep(2 * time.Second)
+				case 3:
+					ShowRankGdgPi(PeringkatGDG)
+					time.Sleep(2 * time.Second)
+				}
+			}
+		case 2:
+			Input = 0
+			for Input != 4 {
+				fmt.Printf("\n\n===>Info Data Mahasiswa<===\n\n1. 10 Mahasiswa/i Teraktif\n2. 10 Mahasiswa Putra Teraktif\n3. 10 Mahasiswi Putri Teraktif\n4. Kembali\n\n")
+				fmt.Printf("Respon (ketik angka saja) : ")
+				Input = Validasi(1, 4)
+				switch Input {
+				case 1:
+					ShowRankMHS(Peringkat)
+					time.Sleep(2 * time.Second)
+				case 2:
+					ShowRankMHSPutra(Peringkat)
+					time.Sleep(2 * time.Second)
+				case 3:
+					ShowRankMHSPutri(Peringkat)
+					time.Sleep(2 * time.Second)
+				}
+			}
+		case 3:
+			Input = 0
+			for Input != 3 {
+				fmt.Printf("\n\n==>Perubahan Data Mahasiswa<===\n\n1. Update TAK Mahasiswa\n2. Form Mahasiswa Baru\n3. Kembali\n\n")
+				fmt.Printf("Respon (ketik angka saja) : ")
+				Input = Validasi(1, 3)
+				switch Input {
+				case 1:
+					UpdateTAK(&dataMahasiswa, dataMahasiswa)
+					WriteDataMHS(&dataMahasiswa)
+					AutoSycRank(dataMahasiswa, &Peringkat)
+					SelectSortRank(&Peringkat)
+					AutoSyncRankGDG(dataGedungPa, dataGedungPi, dataMahasiswa, &PeringkatGDG)
+					SelectSortRankG(&PeringkatGDG)
+					time.Sleep(2 * time.Second)
+				case 2:
+					FillNewStudent(&dataMahasiswa)
+					WriteDataMHS(&dataMahasiswa)
+					AutoSycRank(dataMahasiswa, &Peringkat)
+					SelectSortRank(&Peringkat)
+					time.Sleep(2 * time.Second)
+				}
+			}
+		case 4:
+			Input = 0
+			for Input != 4 {
+				fmt.Printf("\n\n===>Perubahan Data Asrama<==\n\n1. Check In Asrama\n2. Check Out Asrama\n3. Change Room Kamar\n4. Kembali\n\n")
+				fmt.Printf("Respon (ketik angka saja) : ")
+				Input = Validasi(1, 4)
+
+				switch Input {
+				case 1:
+					CheckIn(dataMahasiswa, &dataGedungPa, dataGedungPa, &dataGedungPi, dataGedungPi)
+					WriteDataGDGPutra(&dataGedungPa)
+					WriteDataGDGPutri(&dataGedungPi)
+					AutoSyncRankGDG(dataGedungPa, dataGedungPi, dataMahasiswa, &PeringkatGDG)
+					SelectSortRankG(&PeringkatGDG)
+					time.Sleep(2 * time.Second)
+				case 2:
+					CheckOut(dataMahasiswa, &dataGedungPa, dataGedungPa, &dataGedungPi, dataGedungPi)
+					WriteDataGDGPutra(&dataGedungPa)
+					WriteDataGDGPutri(&dataGedungPi)
+					AutoSyncRankGDG(dataGedungPa, dataGedungPi, dataMahasiswa, &PeringkatGDG)
+					SelectSortRankG(&PeringkatGDG)
+					time.Sleep(2 * time.Second)
+				case 3:
+					ChangeRoom(dataMahasiswa, &dataGedungPa, dataGedungPa, &dataGedungPi, dataGedungPi)
+					WriteDataGDGPutra(&dataGedungPa)
+					WriteDataGDGPutri(&dataGedungPi)
+					AutoSyncRankGDG(dataGedungPa, dataGedungPi, dataMahasiswa, &PeringkatGDG)
+					SelectSortRankG(&PeringkatGDG)
+					time.Sleep(2 * time.Second)
+				}
+			}
+
+		}
+
+	}
+}
+
+type MHS struct {
+	Nama     string `json:"nama"`
+	JKlmn    string `json:"jklmn"`
+	Nim      string `json:"Nim"`
+	Jurusan  string `json:"jurusan"`
+	Angkatan string `json:"angkatan"`
+	TAK      int    `json:"TAK"`
+}
+
+//GDG Tipe data untuk gedung
+type GDG struct {
+	Kode  string
+	Nama  string `json:"Name"`
+	Kamar [nKmr]KSR
+}
+
+type KSR struct {
+	Kasur [nKsr]struct {
+		Nama string
+		NIM  string
+	}
+}
+type RANK struct {
+	Nama, JKlmn, Jurusan string
+	TAK                  int
+}
+type RANKG struct {
+	NamaGdg, JAsrma string
+	TakTotal        float32
+	Jumlah          int
+}
+
+type Mhs [nMhs]MHS
+type GdgPutra [nGdg]GDG
+type GdgPutri [nGdg]GDG
+type Rank [nMhs]RANK
+type RankG [nGdg + nGdg]RANKG
+
+func InputWithSpaces(data *string) {
+
+	scanner := bufio.NewScanner(os.Stdin)
+	scanner.Scan()
+	line := scanner.Text()
+	*data = line
+
+}
+
+func ReadDataMHS(data *Mhs) {
+
+	plan, _ := ioutil.ReadFile("mahasiswa.json")
+	Convert := []byte(plan)
+	err := json.Unmarshal(Convert, &data)
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+}
+
+func WriteDataMHS(data *Mhs) {
+	output, err := json.MarshalIndent(data, "", "\t\t")
+	if err != nil {
+		fmt.Println("Gagal memperberbarui data mahasiswa:", err)
+		return
+	}
+	err = ioutil.WriteFile("mahasiswa.json", output, 0644)
+	if err != nil {
+		fmt.Println("Error writing JSON to file:", err)
+		return
+	}
+}
+
+func ReadRankGedung(data *RankG) {
+
+	plan, _ := ioutil.ReadFile("Peringkat Gedung.json")
+	Convert := []byte(plan)
+	err := json.Unmarshal(Convert, &data)
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+}
+
+func WriteRankGedung(data *RankG) {
+	output, err := json.MarshalIndent(data, "", "\t\t")
+	if err != nil {
+		fmt.Println("Gagal memperberbarui data peringkat gedung:", err)
+		return
+	}
+	err = ioutil.WriteFile("Peringkat Gedung.json", output, 0644)
+	if err != nil {
+		fmt.Println("Error writing JSON to file:", err)
+		return
+	}
+}
+
+func ReadDataGDGPutra(data *GdgPutra) {
+	plan, _ := ioutil.ReadFile("Gedung Putra.json")
+	Convert := []byte(plan)
+	err := json.Unmarshal(Convert, &data)
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+}
+
+func WriteDataGDGPutra(data *GdgPutra) {
+	output, err := json.MarshalIndent(data, "", "\t\t")
+	if err != nil {
+		fmt.Println("Gagal memperbarui data mahasiswa:", err)
+		return
+	}
+	err = ioutil.WriteFile("Gedung Putra.json", output, 0644)
+	if err != nil {
+		fmt.Println("error memperbarui data file mahasiswa:", err)
+		return
+	}
+}
+
+func ReadDataGDGPutri(data *GdgPutri) {
+	plan, _ := ioutil.ReadFile("Gedung Putri.json")
+	Convert := []byte(plan)
+	err := json.Unmarshal(Convert, &data)
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+}
+
+func WriteDataGDGPutri(data *GdgPutri) {
+	output, err := json.MarshalIndent(data, "", "\t\t")
+	if err != nil {
+		fmt.Println("Gagal memperbarui data mahasiswa:", err)
+		return
+	}
+	err = ioutil.WriteFile("Gedung Putri.json", output, 0644)
+	if err != nil {
+		fmt.Println("error memperbarui data file mahasiswa:", err)
+		return
+	}
+}
+
+func ReadDataRank(data *Rank) {
+	plan, _ := ioutil.ReadFile("Peringkat TAK.json")
+	Convert := []byte(plan)
+	err := json.Unmarshal(Convert, &data)
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+}
+
+func WriteDataRANK(data *Rank) {
+	output, err := json.MarshalIndent(data, "", "\t\t")
+	if err != nil {
+		fmt.Println("Gagal memperbarui data mahasiswa:", err)
+		return
+	}
+	err = ioutil.WriteFile("Peringkat TAK.json", output, 0644)
+	if err != nil {
+		fmt.Println("error memperbarui data file mahasiswa:", err)
+		return
+	}
+}
+
+func FindEmptyPutra(data GdgPutra, x, y, z *int) {
+	found := false
+	for i := 0; i < nGdg; i++ {
+		for j := 0; j < nKmr; j++ {
+			for k := 0; k < nKsr; k++ {
+				if data[i].Kamar[j].Kasur[k].NIM == "" && !found {
+					*x = i
+					*y = j
+					*z = k
+					found = true
+				}
+			}
+		}
+	}
+}
+func FindEmptyPutri(data GdgPutri, x, y, z *int) {
+	found := false
+	for i := 0; i < nGdg; i++ {
+		for j := 0; j < nKmr; j++ {
+			for k := 0; k < nKsr && !found; k++ {
+				if data[i].Kamar[j].Kasur[k].NIM == "" {
+					*x = i
+					*y = j
+					*z = k
+					found = true
+				}
+			}
+		}
+	}
+}
+
+//Belum Selesai
+func FillNewStudent(data *Mhs) {
+	for i := 0; i < nMhs; i++ {
+		if data[i].Nim == "" {
+			fmt.Printf("Isi data Mahasiswa baru tersebut :\n")
+			fmt.Printf("\nNama Lengkap : ")
+			InputWithSpaces(&data[i].Nama)
+			fmt.Printf("\nCukup Ketik P atau L saja)\nJenis Kelamin :")
+			InputWithSpaces(&data[i].JKlmn)
+			for data[i].JKlmn != "P" && data[i].JKlmn != "L" {
+				fmt.Printf("\nCukup Ketik P atau L saja)\nJenis Kelamin :")
+				InputWithSpaces(&data[i].JKlmn)
+			}
+			fmt.Printf("NIM : ")
+			InputWithSpaces(&data[i].Nim)
+			fmt.Printf("Jurusan :")
+			InputWithSpaces(&data[i].Jurusan)
+			fmt.Printf("Angkatan :")
+			InputWithSpaces(&data[i].Angkatan)
+			fmt.Printf("TAK :")
+			fmt.Scanln(&data[i].TAK)
+			break
+		}
+	}
+}
+
+func CheckIn(data1 Mhs, data2 *GdgPutra, data3 GdgPutra, data4 *GdgPutri, data5 GdgPutri) {
+	var Input, Index, x, y, z int
+	var NIM string
+
+	fmt.Printf("NIM Mahasiswa tersebut : ")
+	fmt.Scan(&NIM)
+	SearchMHS(data1, NIM, &Index)
+	fmt.Printf("\n\nKonfirmasi. Apakah benar ? (1. Benar 2.Tidak Benar) : ")
+	Input = Validasi(1, 2)
+	for Input != 1 {
+		fmt.Printf("NIM Mahasiswa tersebut : ")
+		fmt.Scan(&NIM)
+		SearchMHS(data1, NIM, &Index)
+		fmt.Printf("\n\nKonfirmasi. Apakah benar ? (1. Benar 2.Tidak Benar) : ")
+		Input = Validasi(1, 2)
+	}
+	if data1[Index].JKlmn == "P" {
+		FindEmptyPutri(data5, &x, &y, &z)
+		data4[x].Kamar[y].Kasur[z].Nama = data1[Index].Nama
+		data4[x].Kamar[y].Kasur[z].NIM = data1[Index].Nim
+		Kamar := ConvertNoKamar(y)
+		fmt.Printf("\n===>Check In berhasil<===\n\nDengan data kamar :\nNama : %v\nJurusan : %v", data1[Index].Nama, data1[Index].Jurusan)
+		fmt.Printf("\nGedung: %v\nKamar: %v\nKasur : %v\n\n===>Check in Selesai<==", data5[x].Nama, Kamar, z+1)
+
+	} else if data1[Index].JKlmn == "L" {
+		FindEmptyPutra(data3, &x, &y, &z)
+		data2[x].Kamar[y].Kasur[z].Nama = data1[Index].Nama
+		data2[x].Kamar[y].Kasur[z].NIM = data1[Index].Nim
+		Kamar := ConvertNoKamar(y)
+		fmt.Printf("\n===>Check in berhasil<===\n\nDengan data kamar :\nNama : %v\nJurusan : %v", data1[Index].Nama, data1[Index].Jurusan)
+		fmt.Printf("\nGedung: %v\nKamar: %v\nKasur : %v\n\n===>Check in Selesai<==", data3[x].Nama, Kamar, z+1)
+	}
+
+}
+
+func CheckOut(data1 Mhs, data2 *GdgPutra, data3 GdgPutra, data4 *GdgPutri, data5 GdgPutri) {
+	var NIM string
+	var Index, Input, x, y, z int
+	fmt.Printf("NIM Mahasiswa tersebut : ")
+	fmt.Scan(&NIM)
+	SearchMHS(data1, NIM, &Index)
+	fmt.Printf("\n\nKonfirmasi. Apakah benar ? (1. Benar 2.Tidak Benar) : ")
+	Input = Validasi(1, 2)
+	for Input != 1 {
+		fmt.Printf("NIM Mahasiswa tersebut : ")
+		fmt.Scan(&NIM)
+		SearchMHS(data1, NIM, &Index)
+		fmt.Printf("\n\nKonfirmasi. Apakah benar ? (1. Benar 2.Tidak Benar) : ")
+		Input = Validasi(1, 2)
+	}
+	if data1[Index].JKlmn == "L" {
+		SearchAsramaPutra(data3, NIM, &x, &y, &z)
+		fmt.Printf("\n\nKonfirmasi Check Out. (1. Iya, 2. Tidak) : ")
+		Input = Validasi(1, 2)
+		if Input == 1 {
+			data2[x].Kamar[y].Kasur[z].NIM = ""
+			data2[x].Kamar[y].Kasur[z].Nama = ""
+		}
+		fmt.Printf("\n ==>Check Out Berhasil<==")
+	} else if data1[Index].JKlmn == "P" {
+		SearchAsramaPutri(data5, NIM, &x, &y, &z)
+		fmt.Printf("\n\nKonfirmasi Check Out. (1. Iya, 2. Tidak) : ")
+		Input = Validasi(1, 2)
+		if Input == 1 {
+			data4[x].Kamar[y].Kasur[z].NIM = ""
+			data4[x].Kamar[y].Kasur[z].Nama = ""
+		}
+		fmt.Printf("\n ==>Check Out Berhasil<==")
+	}
+}
+
+func ChangeRoom(data1 Mhs, data2 *GdgPutra, data3 GdgPutra, data4 *GdgPutri, data5 GdgPutri) {
+	var NIM string
+	var Index, Input, x, y, z int
+	fmt.Printf("NIM Mahasiswa tersebut : ")
+	fmt.Scan(&NIM)
+	SearchMHS(data1, NIM, &Index)
+	fmt.Printf("\n\nKonfirmasi. Apakah benar ? (1. Benar 2.Tidak Benar) : ")
+	Input = Validasi(1, 2)
+	for Input != 1 {
+		fmt.Printf("NIM Mahasiswa tersebut : ")
+		fmt.Scan(&NIM)
+		SearchMHS(data1, NIM, &Index)
+		fmt.Printf("\n\nKonfirmasi. Apakah benar ? (1. Benar 2.Tidak Benar) : ")
+		Input = Validasi(1, 2)
+	}
+	if data1[Index].JKlmn == "L" {
+		SearchAsramaPutra(data3, NIM, &x, &y, &z)
+		data2[x].Kamar[y].Kasur[z].NIM = ""
+		data2[x].Kamar[y].Kasur[z].Nama = ""
+		FindEmptyPutra(data3, &x, &y, &z)
+		data2[x].Kamar[y].Kasur[z].Nama = data1[Index].Nama
+		data2[x].Kamar[y].Kasur[z].NIM = data1[Index].Nim
+		Kamar := ConvertNoKamar(y)
+		fmt.Printf("\n\n===>Change Room Berhasill<===\n\nDengan data kamar :\nNama : %v\nJurusan : %v", data1[Index].Nama, data1[Index].Jurusan)
+		fmt.Printf("\nGedung: %v\nKamar: %v\nKasur : %v\n\n===>Change Room Selesai<==", data3[x].Nama, Kamar, z+1)
+	} else if data1[Index].JKlmn == "P" {
+
+	}
+
+}
+
+func ConvertNoKamar(z int) int {
+	var kamar int
+	if z >= 9 {
+		kamar = z + 392
+	} else if z >= 6 {
+		kamar = z + 295
+	} else if z >= 3 {
+		kamar = z + 198
+	} else {
+		kamar = z + 101
+	}
+	return kamar
+}
+
+func Validasi(batas1 int, batas2 int) int {
+	var key int
+
+	fmt.Scan(&key)
+	valid := false
+	for !valid {
+		if key >= batas1 && key <= batas2 {
+			valid = true
+		} else {
+			fmt.Printf("Input tidak valid, silahkan diulang kembali\n Jawab (Ketik angka saja) : ")
+			fmt.Scan(&key)
+		}
+	}
+	return key
+}
+func SearchMHS(data Mhs, key string, index *int) {
+	found := false
+	for !found {
+		for i := 0; i < nMhs && !found; i++ {
+			if data[i].Nim == key {
+				nama := data[i].Nama
+				Jurusan := data[i].Jurusan
+				Angkatan := data[i].Angkatan
+				TAK := data[i].TAK
+				fmt.Printf("\n==>Hasil Pencarian<===\n\nNama : %v\nJurusan : %v\nAngkatan : %v\nTAK : %v", nama, Jurusan, Angkatan, TAK)
+				*index = i
+				found = true
+			}
+		}
+		if found == false {
+			fmt.Printf("\nMahasiswa tidak ditemukan\nUlangi Kembali ...\n")
+		}
+	}
+
+}
+
+func SearchMHSfi(data Mhs, key string, index *int) {
+	found := false
+	for i := 0; i < nMhs && !found; i++ {
+		if data[i].Nim == key {
+			*index = i
+			found = true
+		}
+	}
+
+}
+
+func SearchAsramaPutra(data GdgPutra, key string, x, y, z *int) {
+	found := false
+	for i := 0; i < nGdg && !found; i++ {
+		for j := 0; j < nKmr && !found; j++ {
+			for k := 0; k < nKsr && !found; k++ {
+				if data[i].Kamar[j].Kasur[k].NIM == key {
+					*x = i
+					*y = j
+					*z = k
+					gedung := data[i].Nama
+					kamar := ConvertNoKamar(j)
+					kasur := k + 1
+					fmt.Printf("\n==>Data Asrama Mahasiswa Tersebut<===\n\nGedung : %v\nKamar : %v\nNo Kasur : %v", gedung, kamar, kasur)
+					found = true
+				}
+			}
+		}
+	}
+	if found == false {
+		fmt.Printf("\nMahasiswa tersebut tidak terdaftar pada database Asrama")
+	}
+}
+
+func SearchAsramaPutri(data GdgPutri, key string, x, y, z *int) {
+	found := false
+	for i := 0; i < nGdg && !found; i++ {
+		for j := 0; j < nKmr && !found; j++ {
+			for k := 0; k < nKsr && !found; k++ {
+				if data[i].Kamar[j].Kasur[k].NIM == key {
+					*x = i
+					*y = j
+					*z = k
+					gedung := data[i].Nama
+					kamar := ConvertNoKamar(j)
+					kasur := k + 1
+					fmt.Printf("\n==>Data Asrama Mahasiswa Tersebut<===\n\nGedung : %v\nKamar : %v\nNo Kasur : %v", gedung, kamar, kasur)
+					found = true
+				}
+			}
+		}
+	}
+	if found == false {
+		fmt.Printf("\nMahasiswa tersebut tidak terdaftar pada database Asrama")
+	}
+}
+
+func ShowRankMHS(data Rank) {
+	fmt.Printf("==>10 Besar Mahasiswa/i Teraktif<==\n\n")
+	for i := 0; i < 10; i++ {
+		fmt.Printf("Peringkat %v :\nNama :  %v\nJenis Kelamin : %v\nJurusan : %v\nPoint TAK : %v\n\n", i+1, data[i].Nama, data[i].JKlmn, data[i].Jurusan, data[i].TAK)
+	}
+}
+
+func ShowRankMHSPutri(data1 Rank) {
+	var j int
+
+	fmt.Printf("==>10 Besar Mahasiswi Teraktif<==\n\n")
+	for i := 0; j < 10; i++ {
+		if data1[i].JKlmn == "P" {
+			fmt.Printf("Peringkat %v :\nNama :  %v\nJenis Kelamin : %v\nJurusan : %v\nPoint TAK : %v\n\n", j+1, data1[i].Nama, data1[i].JKlmn, data1[i].Jurusan, data1[i].TAK)
+			j++
+		}
+	}
+}
+
+func ShowRankMHSPutra(data2 Rank) {
+	var j int
+
+	fmt.Printf("==>10 Besar Mahasiswa Teraktif<==\n\n")
+	for i := 0; j < 10; i++ {
+		if data2[i].JKlmn == "L" {
+			fmt.Printf("Peringkat %v :\nNama :  %v\nJenis Kelamin : %v\nJurusan : %v\nPoint TAK : %v\n\n", j+1, data2[i].Nama, data2[i].JKlmn, data2[i].Jurusan, data2[i].TAK)
+			j++
+		}
+	}
+}
+
+func ShowRankGdg(data RankG) {
+	fmt.Printf("==>Peringkat Gedung Asrama Teraktif<==\n\n")
+	for i := 0; i < nGdg+nGdg; i++ {
+		fmt.Printf("Peringkat %v\nNama Gedung : %v\nJenis Asrama : %v\nRata-rata TAK : %.2f\nJumlah Anggota : %v Mahasiswa\n\n", i+1, data[i].NamaGdg, data[i].JAsrma, data[i].TakTotal, data[i].Jumlah)
+	}
+}
+
+func ShowRankGdgPa(data RankG) {
+	var j int
+	fmt.Printf("==>Peringkat Gedung Asrama Teraktif<==\n\n")
+	for i := 0; i < nGdg+nGdg; i++ {
+		if data[i].JAsrma == "Putra" {
+			fmt.Printf("Peringkat %v\nNama Gedung : %v\nJenis Asrama : %v\nRata-rata TAK : %.2f\nJumlah Anggota : %v Mahasiswa\n\n", j+1, data[i].NamaGdg, data[i].JAsrma, data[i].TakTotal, data[i].Jumlah)
+			j++
+		}
+
+	}
+}
+
+func ShowRankGdgPi(data RankG) {
+	var j int
+	fmt.Printf("==>Peringkat Gedung Asrama Teraktif<==\n\n")
+	for i := 0; i < nGdg+nGdg; i++ {
+		if data[i].JAsrma == "Putri" {
+			fmt.Printf("Peringkat %v\nNama Gedung : %v\nJenis Asrama : %v\nRata-rata TAK : %.2f\nJumlah Anggota : %v Mahasiswa\n\n", j+1, data[i].NamaGdg, data[i].JAsrma, data[i].TakTotal, data[i].Jumlah)
+			j++
+		}
+
+	}
+}
+
+func UpdateTAK(data *Mhs, data1 Mhs) {
+	var NIM string
+	var Index, Input int
+	fmt.Printf("NIM Mahasiswa tersebut : ")
+	fmt.Scan(&NIM)
+	SearchMHS(data1, NIM, &Index)
+	fmt.Printf("\n\nKonfirmasi. Apakah benar ? (1. Benar 2.Tidak Benar) : ")
+	Input = Validasi(1, 2)
+	for Input != 1 {
+		fmt.Printf("NIM Mahasiswa tersebut : ")
+		fmt.Scan(&NIM)
+		SearchMHS(data1, NIM, &Index)
+		fmt.Printf("\n\nKonfirmasi. Apakah benar ? (1. Benar 2.Tidak Benar) : ")
+		Input = Validasi(1, 2)
+	}
+	fmt.Printf("Jumlah TAK baru : ")
+	fmt.Scan(&data[Index].TAK)
+	fmt.Printf("\n\n===>Update TAK Selesai<==")
+}
+
+/*
+func AutoSync(data Mhs, data2 *GdgPutri) {
+	x := 0
+	j := 0
+	var SimpanPerempuan [170]struct {
+		nama string
+		nim  string
+	}
+	for i := 0; i < nMhs; i++ {
+		if data[i].JKlmn == "P" {
+			SimpanPerempuan[j].nama = data[i].Nama
+			SimpanPerempuan[j].nim = data[i].Nim
+			j = j + 1
+		}
+	}
+
+	for i := 0; i < nGdg; i++ {
+		for j := 0; j < nKmr; j++ {
+			for k := 0; k < nKsr-2; k++ {
+				if data2[i].Kamar[j].Kasur[k].NIM == "" {
+					data2[i].Kamar[j].Kasur[k].Nama = SimpanPerempuan[x].nama
+					data2[i].Kamar[j].Kasur[k].NIM = SimpanPerempuan[x].nim
+					x = x + 1
+				}
+			}
+		}
+	}
+}*/
+
+func AutoSycRank(data Mhs, rank *Rank) {
+	for k := 0; k < nMhs; k++ {
+		rank[k].Nama = data[k].Nama
+		rank[k].TAK = data[k].TAK
+		rank[k].JKlmn = data[k].JKlmn
+		rank[k].Jurusan = data[k].Jurusan
+	}
+}
+
+func AutoSyncRankGDG(data GdgPutra, data1 GdgPutri, data2 Mhs, rank *RankG) {
+	var TAKtotal, Index, nM int
+	for k := 0; k < nGdg; k++ {
+		nM = 0
+		rank[k].NamaGdg = data[k].Nama
+		rank[k].JAsrma = "Putra"
+		TAKtotal = 0
+		for l := 0; l < nKmr; l++ {
+			for m := 0; m < nKsr; m++ {
+				SearchMHSfi(data2, data[k].Kamar[l].Kasur[m].NIM, &Index)
+				if data2[Index].Nim != "" {
+					TAKtotal = TAKtotal + data2[Index].TAK
+					nM = nM + 1
+				}
+			}
+		}
+		rank[k].TakTotal = float32(TAKtotal) / float32(nM)
+		rank[k].Jumlah = nM
+	}
+
+	i := nGdg
+	for k := 0; k < nGdg; k++ {
+		nM = 0
+		rank[i].NamaGdg = data1[k].Nama
+		rank[i].JAsrma = "Putri"
+		TAKtotal = 0
+		for l := 0; l < nKmr; l++ {
+			for m := 0; m < nKsr; m++ {
+				SearchMHSfi(data2, data1[k].Kamar[l].Kasur[m].NIM, &Index)
+				if data2[Index].Nim != "" {
+					TAKtotal = TAKtotal + data2[Index].TAK
+					nM = nM + 1
+				}
+			}
+		}
+		rank[i].TakTotal = float32(TAKtotal) / float32(nM)
+		rank[i].Jumlah = nM
+		i++
+	}
+}
+
+func SelectSortRank(data *Rank) {
+	for i := 0; i < nMhs; i++ {
+		iMax := i
+		for j := i + 1; j < nMhs; j++ {
+			if data[iMax].TAK < data[j].TAK {
+				iMax = j
+			}
+		}
+		temp := data[iMax].TAK
+		data[iMax].TAK = data[i].TAK
+		data[i].TAK = temp
+		temp1 := data[iMax].Nama
+		data[iMax].Nama = data[i].Nama
+		data[i].Nama = temp1
+		temp1 = data[iMax].JKlmn
+		data[iMax].JKlmn = data[i].JKlmn
+		data[i].JKlmn = temp1
+		temp1 = data[iMax].Jurusan
+		data[iMax].Jurusan = data[i].Jurusan
+		data[i].Jurusan = temp1
+	}
+}
+
+func SelectSortRankG(data *RankG) {
+	for i := 0; i < nGdg+nGdg; i++ {
+		iMax := i
+		for j := i + 1; j < nGdg+nGdg; j++ {
+			if data[iMax].TakTotal < data[j].TakTotal {
+				iMax = j
+			}
+		}
+		temp := data[iMax].TakTotal
+		data[iMax].TakTotal = data[i].TakTotal
+		data[i].TakTotal = temp
+		temp1 := data[iMax].NamaGdg
+		data[iMax].NamaGdg = data[i].NamaGdg
+		data[i].NamaGdg = temp1
+		temp1 = data[iMax].JAsrma
+		data[iMax].JAsrma = data[i].JAsrma
+		data[i].JAsrma = temp1
+		temp2 := data[iMax].Jumlah
+		data[iMax].Jumlah = data[i].Jumlah
+		data[i].Jumlah = temp2
+	}
+}
+
+func main() {
+	var dataMahasiswa Mhs
+	var dataGedungPa GdgPutra
+	var dataGedungPi GdgPutri
+	var Peringkat Rank
+	var PeringkatGDG RankG
+	var Input int
+	/*
+		//FillNewStudent(&dataMahasiswa)
+		ReadDataMHS(&dataMahasiswa)
+		ReadDataGDGPutra(&dataGedungPa)
+		ReadDataGDGPutri(&dataGedungPi)
+		//CheckIn(dataMahasiswa, &dataGedungPa, dataGedungPa, &dataGedungPi, dataGedungPi)
+		//CheckOut(dataMahasiswa, &dataGedungPa, dataGedungPa, &dataGedungPi, dataGedungPi)
+		//ChangeRoom(dataMahasiswa, &dataGedungPa, dataGedungPa, &dataGedungPi, dataGedungPi)
+		//AutoSync(dataMahasiswa, &dataGedungPi)
+		WriteDataGDGPutra(&dataGedungPa)
+		WriteDataGDGPutri(&dataGedungPi)
+		//FillNewStudent(&dataMahasiswa)
+		//UpdateTAK(&dataMahasiswa, dataMahasiswa)
+		WriteDataMHS(&dataMahasiswa)
+		ReadDataRank(&Peringkat)
+		AutoSycRank(dataMahasiswa, &Peringkat)
+		SelectSortRank(&Peringkat)
+		//ShowRankMHS(Peringkat)
+		//ShowRankMHSPutra(Peringkat)
+		WriteDataRANK(&Peringkat)
+		ReadRankGedung(&PeringkatGDG)
+		AutoSyncRankGDG(dataGedungPa, dataGedungPi, dataMahasiswa, &PeringkatGDG)
+		SelectSortRankG(&PeringkatGDG)
+		WriteRankGedung(&PeringkatGDG)
+		//ShowRankGdg(PeringkatGDG)
+		//ShowRankGdgPa(PeringkatGDG)
+		ShowRankGdgPi(PeringkatGDG)
+		//SearchMHS(dataMahasiswa, "1301194051")
+		//fmt.Print(dataGedungPi[0].Kamar[0].Kasur[0].Nama)
+		//var Input int
+		//Input = Validasi(Input, 1, 2)
+
+	*/
+	ReadDataMHS(&dataMahasiswa)
+	ReadDataGDGPutra(&dataGedungPa)
+	ReadDataGDGPutri(&dataGedungPi)
+	ReadDataRank(&Peringkat)
+	ReadRankGedung(&PeringkatGDG)
+
+	for Input != 5 {
+		fmt.Printf("===>Menu Utama<===\n\n1. Info Data Asrama\n2. Info Data Mahasiswa\n3. Perubahan Data Mahasiswa\n4. Perubahan Data Asrama\n5. Keluar\n\n")
+		fmt.Printf("Respon (ketik angka saja) : ")
+		Input = Validasi(1, 5)
+
+		switch Input {
+		case 1:
+			Input = 0
+			for Input != 4 {
+				fmt.Printf("\n\n===>Info Data Asrama<===\n\n1. Gedung Asrama Teraktif (Pa/Pi)\n2. Gedung Asrama Putra Teraktif\n3. Gedung Asrama Putri Teraktif\n4. Kembali\n\n")
+				fmt.Printf("Respon (ketik angka saja) : ")
+				Input = Validasi(1, 4)
+				switch Input {
+				case 1:
+					ShowRankGdg(PeringkatGDG)
+				case 2:
+					ShowRankGdgPa(PeringkatGDG)
+				case 3:
+					ShowRankGdgPi(PeringkatGDG)
+				}
+			}
+		case 2:
+			Input = 0
+			for Input != 4 {
+				fmt.Printf("\n\n===>Info Data Mahasiswa<===\n\n1. 10 Mahasiswa/i Teraktif\n2. 10 Mahasiswa Putra Teraktif\n3. 10 Mahasiswi Putri Teraktif\n4. Kembali\n\n")
+				fmt.Printf("Respon (ketik angka saja) : ")
+				Input = Validasi(1, 4)
+				switch Input {
+				case 1:
+					ShowRankMHS(Peringkat)
+				case 2:
+					ShowRankMHSPutra(Peringkat)
+				case 3:
+					ShowRankMHSPutri(Peringkat)
+				}
+			}
+		case 3:
+			Input = 0
+			for Input != 3 {
+				fmt.Printf("\n\n==>Perubahan Data Mahasiswa<===\n\n1. Update TAK Mahasiswa\n2. Form Mahasiswa Baru\n3.Kembali\n\n")
+				fmt.Printf("Respon (ketik angka saja) : ")
+				Input = Validasi(1, 3)
+				switch Input {
+				case 1:
+					UpdateTAK(&dataMahasiswa, dataMahasiswa)
+					WriteDataMHS(&dataMahasiswa)
+					AutoSycRank(dataMahasiswa, &Peringkat)
+					SelectSortRank(&Peringkat)
+					AutoSyncRankGDG(dataGedungPa, dataGedungPi, dataMahasiswa, &PeringkatGDG)
+					SelectSortRankG(&PeringkatGDG)
+				case 2:
+					FillNewStudent(&dataMahasiswa)
+					WriteDataMHS(&dataMahasiswa)
+					AutoSycRank(dataMahasiswa, &Peringkat)
+					SelectSortRank(&Peringkat)
+				}
+			}
+		case 4:
+			Input = 0
+			for Input != 4 {
+				fmt.Printf("\n\n===>Perubahan Data Asrama<==\n\n1. Check In Asrama\n2. Check Out Asrama\n3. Change Room Kamar\n4. Kembali\n\n")
+				fmt.Printf("Respon (ketik angka saja) : ")
+				Input = Validasi(1, 4)
+				switch Input {
+				case 1:
+					CheckIn(dataMahasiswa, &dataGedungPa, dataGedungPa, &dataGedungPi, dataGedungPi)
+					WriteDataGDGPutra(&dataGedungPa)
+					WriteDataGDGPutri(&dataGedungPi)
+					AutoSyncRankGDG(dataGedungPa, dataGedungPi, dataMahasiswa, &PeringkatGDG)
+					SelectSortRankG(&PeringkatGDG)
+				case 2:
+					CheckOut(dataMahasiswa, &dataGedungPa, dataGedungPa, &dataGedungPi, dataGedungPi)
+					WriteDataGDGPutra(&dataGedungPa)
+					WriteDataGDGPutri(&dataGedungPi)
+					AutoSyncRankGDG(dataGedungPa, dataGedungPi, dataMahasiswa, &PeringkatGDG)
+					SelectSortRankG(&PeringkatGDG)
+				case 3:
+					ChangeRoom(dataMahasiswa, &dataGedungPa, dataGedungPa, &dataGedungPi, dataGedungPi)
+					WriteDataGDGPutra(&dataGedungPa)
+					WriteDataGDGPutri(&dataGedungPi)
+					AutoSyncRankGDG(dataGedungPa, dataGedungPi, dataMahasiswa, &PeringkatGDG)
+					SelectSortRankG(&PeringkatGDG)
+				}
+			}
+
+		}
+
+	}
+}

@@ -1,0 +1,1232 @@
+[
+		{
+				"Kode": "1",
+				"Name": "Laag",
+				"Kamar": [
+						{
+								"Kasur": [
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "Sahitya Satwika",
+												"NIM": "1237336667"
+										},
+										{
+												"Nama": "Ryan Pradipto",
+												"NIM": "1382547172"
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "Jaya Eko",
+												"NIM": "1502938492"
+										},
+										{
+												"Nama": "Deni Rahmah Giovani",
+												"NIM": "5230482739"
+										},
+										{
+												"Nama": "Damar Daniswara",
+												"NIM": "1374482931"
+										},
+										{
+												"Nama": "Indarto Irfandi",
+												"NIM": "1277773631"
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "Bagus Putu Aji",
+												"NIM": "1204829339"
+										},
+										{
+												"Nama": "Abraham Pratama",
+												"NIM": "1201193014"
+										},
+										{
+												"Nama": "Adam Albert",
+												"NIM": "1903833232"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "Adinata Purnomo",
+												"NIM": "1201301032"
+										},
+										{
+												"Nama": "Adira Fairuz",
+												"NIM": "1904932941"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "Bayu Eka Nugroho Supra",
+												"NIM": "650333444"
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "Aldari Kayano",
+												"NIM": "1939133321"
+										},
+										{
+												"Nama": "Prasaja Putro",
+												"NIM": "1932201928"
+										},
+										{
+												"Nama": "Bayu Eka Nugroho Supra",
+												"NIM": "650333444"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "Abraham Reynard",
+												"NIM": "1920193318"
+										},
+										{
+												"Nama": "Abyan Nanda",
+												"NIM": "1932001384"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "Adya Surya",
+												"NIM": "1919320183"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "Adam Albert",
+												"NIM": "1961255532"
+										},
+										{
+												"Nama": "Abi Nurwahid",
+												"NIM": "1973245122"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "Agam Basupati",
+												"NIM": "1941200032"
+										},
+										{
+												"Nama": "Azka Aldric",
+												"NIM": "1992017365"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "Abdul Rahman",
+												"NIM": "1942880042"
+										},
+										{
+												"Nama": "Abdullah Abid",
+												"NIM": "1938472944"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "Addar Poldi",
+												"NIM": "1920337749"
+										},
+										{
+												"Nama": "Adelard Radmilo Emery",
+												"NIM": "1928443122"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "Adelardo Cetta",
+												"NIM": "1902000332"
+										},
+										{
+												"Nama": "Adelio Prasaja",
+												"NIM": "1972882291"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						}
+				]
+		},
+		{
+				"Kode": "2",
+				"Name": "Larat",
+				"Kamar": [
+						{
+								"Kasur": [
+										{
+												"Nama": "Adiasta Mahnipuna",
+												"NIM": "1963535534"
+										},
+										{
+												"Nama": "Aditya Nurrahman",
+												"NIM": "1322263719"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "Dito Mahya",
+												"NIM": "1391636242"
+										},
+										{
+												"Nama": "Tyo Naufal Agustin",
+												"NIM": "1392282739"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "Adli Amzar Fairuz",
+												"NIM": "1393122239"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "Adolf Reimond",
+												"NIM": "1392019311"
+										},
+										{
+												"Nama": "Syafi Amzari",
+												"NIM": "1300012930"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "Muhammad Alfi Syahri Nasution",
+												"NIM": "1301190326"
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "Adriel Mesiah",
+												"NIM": "1302283933"
+										},
+										{
+												"Nama": "Akbar Ryanus",
+												"NIM": "1344822932"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "Adri Kaili",
+												"NIM": "1344423213"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "Fajar Bahri",
+												"NIM": "1300004231"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "Idrus Zuhair",
+												"NIM": "1293833231"
+										},
+										{
+												"Nama": "Ihsan Fadil",
+												"NIM": "1293747478"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "Ikrar Sastra Yogiswara",
+												"NIM": "1237464442"
+										},
+										{
+												"Nama": "Ilham Abdul",
+												"NIM": "1283833331"
+										},
+										{
+												"Nama": "Maulana Farrel Ceskicevas",
+												"NIM": "1301190311"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "Ilias Aron",
+												"NIM": "1222631341"
+										},
+										{
+												"Nama": "Imtiz Ammar",
+												"NIM": "1273631299"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "Indrasta Hastungkara",
+												"NIM": "1238338330"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "Indraya Sahitya",
+												"NIM": "1244928800"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						}
+				]
+		},
+		{
+				"Kode": "3",
+				"Name": "Leti",
+				"Kamar": [
+						{
+								"Kasur": [
+										{
+												"Nama": "Yosep Abdi",
+												"NIM": "1239938400"
+										},
+										{
+												"Nama": "Yora Heber",
+												"NIM": "1238839990"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "Irfan Watson",
+												"NIM": "129904097"
+										},
+										{
+												"Nama": "Irsyad Najid",
+												"NIM": "12287336211"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "Irvin Kensel",
+												"NIM": "1239712974"
+										},
+										{
+												"Nama": "Irzaldi Ignasius",
+												"NIM": "1231728562"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "Shadifa Auliatama",
+												"NIM": "1301194220"
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "Isaiah Badri",
+												"NIM": "1203603476"
+										},
+										{
+												"Nama": "Iskandar Luqman",
+												"NIM": "1225798432"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "Luqman Lughawi",
+												"NIM": "1222297311"
+										},
+										{
+												"Nama": "Ismail Daffa",
+												"NIM": "1298402221"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "Irwin Bahari",
+												"NIM": "1229879444"
+										},
+										{
+												"Nama": "Itamar Bert",
+												"NIM": "1253764722"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "Ivan Reynard",
+												"NIM": "1233337618"
+										},
+										{
+												"Nama": "Nadhif Chaim",
+												"NIM": "1236813331"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "Ivan Gaharu",
+												"NIM": "1713270001"
+										},
+										{
+												"Nama": "Janu Satya",
+												"NIM": "1739000931"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "Wesa Wicaksana",
+												"NIM": "1703232002"
+										},
+										{
+												"Nama": "Jarvis Dasha",
+												"NIM": "1770203333"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "Jarah Achazia",
+												"NIM": "1738238290"
+										},
+										{
+												"Nama": "Jati Arsha",
+												"NIM": "1739333380"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "Adika Adiwangsa",
+												"NIM": "1722300019"
+										},
+										{
+												"Nama": "Jatinra Ugahari",
+												"NIM": "1773933922"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "Jaya Jazali",
+												"NIM": "1700083320"
+										},
+										{
+												"Nama": "Kevin Hernando",
+												"NIM": "1733000939"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						}
+				]
+		},
+		{
+				"Kode": "4",
+				"Name": "Liki",
+				"Kamar": [
+						{
+								"Kasur": [
+										{
+												"Nama": "Khadim Karim",
+												"NIM": "1728739299"
+										},
+										{
+												"Nama": "Khairy Darka",
+												"NIM": "1793993900"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "Khalaf Muinurraja",
+												"NIM": "1735432680"
+										},
+										{
+												"Nama": "Khalda Fauzan",
+												"NIM": "1773092705"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "Fauzi Rahmani",
+												"NIM": "1777338905"
+										},
+										{
+												"Nama": "Alysa Atmariani",
+												"NIM": "1700185271"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "Khalfani Reagan",
+												"NIM": "1702925551"
+										},
+										{
+												"Nama": "Naufal Rusyaidi",
+												"NIM": "173000285"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "Khan Kamil",
+												"NIM": "1770039155"
+										},
+										{
+												"Nama": "Kastara Cendana",
+												"NIM": "1777392055"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "Kinnard Gawain",
+												"NIM": "1503920348"
+										},
+										{
+												"Nama": "Kiyoshi Hendri",
+												"NIM": "1523838101"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "Kostya Cendikia",
+												"NIM": "1598239032"
+										},
+										{
+												"Nama": "Kumara Nagata",
+												"NIM": "1512300072"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "Jafier Rayhan Al Mudhofar",
+												"NIM": "1201190085"
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "Labib Khuwailid",
+												"NIM": "1500238925"
+										},
+										{
+												"Nama": "Lantang Jauhari",
+												"NIM": "1529380007"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "Latif Gundo",
+												"NIM": "1527326790"
+										},
+										{
+												"Nama": "Adamya Lemuel",
+												"NIM": "1569127311"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "Leroy Melvin",
+												"NIM": "1589900037"
+										},
+										{
+												"Nama": "Louis Xavier",
+												"NIM": "1692739273"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "Luigi Indrasta",
+												"NIM": "1628820031"
+										},
+										{
+												"Nama": "Lukas Benjamin",
+												"NIM": "1600323910"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "Mahardika Nadindra",
+												"NIM": "1602397557"
+										},
+										{
+												"Nama": "Mahasura Boaz",
+												"NIM": "1602308222"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						}
+				]
+		},
+		{
+				"Kode": "5",
+				"Name": "Linggian",
+				"Kamar": [
+						{
+								"Kasur": [
+										{
+												"Nama": "Tristan Bramanty",
+												"NIM": "7721386113"
+										},
+										{
+												"Nama": "Urda Karamoy",
+												"NIM": "7732939001"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "Mahmud Muhsin",
+												"NIM": "7729370007"
+										},
+										{
+												"Nama": "Mahrus Mumtaz",
+												"NIM": "7700002371"
+										},
+										{
+												"Nama": "Naufal Dary Abyu",
+												"NIM": "1301928221"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "Wisnu Hayfa",
+												"NIM": "7707002322"
+										},
+										{
+												"Nama": "Xavier Mikhail Abimanyu",
+												"NIM": "7700003918"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "Jafier Rayhan Cahyong",
+												"NIM": "1201194078"
+										},
+										{
+												"Nama": "Bagus Dwi Prasetyo",
+												"NIM": "1301190076"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "Bagas Tri Wibowo",
+												"NIM": "1301194051"
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						},
+						{
+								"Kasur": [
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										},
+										{
+												"Nama": "",
+												"NIM": ""
+										}
+								]
+						}
+				]
+		}
+]
